@@ -11,8 +11,8 @@ Este proyecto es un sistema de control de nivel de agua basado en **NodeMCU (ESP
 ## 🚀 Características (Features)
 
 * **Control Automático Inteligente:** Activación por nivel bajo en tanque y desactivación por tanque lleno o cisterna vacía.
-* **Protección del Motor (Timeout X):** Apagado automático si la bomba supera los 5 minutos encendida para evitar sobrecalentamiento o desbordamientos.
-* **Protección de Descanso (Inactividad N):** Impide que la bomba se encienda nuevamente antes de 1 minuto de haber parado, protegiendo la vida útil del motor.
+* **Protección del Motor (Timeout X):** Apagado automático si la bomba supera los 30 minutos encendida para evitar sobrecalentamiento o desbordamientos.
+* **Protección de Descanso (Inactividad N):** Impide que la bomba se encienda nuevamente antes de 10 minutos de haber parado, protegiendo la vida útil del motor.
 * **Filtro de Ruido Digital:** Algoritmo de confirmación de 2 segundos para las lecturas de la boya del tanque, eliminando falsos positivos causados por interferencias en el cable de 60 metros.
 * **Interfaz Web Responsiva:** Control manual (On/Off) y visualización de estado en tiempo real.
 * **Historial de Eventos (RAM):** Registro de los últimos 40 eventos (20 encendidos/20 apagados) con fecha, hora y causa específica del cambio de estado.
@@ -70,4 +70,20 @@ La página principal se sirve directamente desde el NodeMCU y está optimizada p
 
 ---
 
-**¿Te gustaría que añada una sección de "Troubleshooting" (solución de problemas) por si el WiFi llega a desconectarse?**
+## 🔧 Instalación
+
+### 💡 Tips de Instalación 
+
+1. **Alimentación Separada:** Conecta la fuente Step-Down de **5V al pin VIN** del NodeMCU (no al pin 3.3V directamente), ya que el regulador interno del NodeMCU filtrará mejor cualquier pequeño ruido de la fuente.
+2. **El "Pull-up" Físico:** Aunque el código tiene filtro, la resistencia de **10k Ohm** es tu mejor amiga. Instálala lo más cerca posible de la placa NodeMCU, no al final del cable de 60 metros.
+3. **Caja de Control:** Si vas a meter todo en una caja estanca, trata de que la antena del NodeMCU (la parte del PCB con trazas en zigzag) no quede pegada a cables de 220V o paredes metálicas para no perder señal WiFi.
+
+### 📋 Checklist de Pruebas
+
+* [ ] **Prueba de Secado:** Simula el tanque bajo desconectando el cable y verifica que el relay actúe tras los 2 segundos de espera.
+* [ ] **Prueba de Seguridad (X):** Deja la bomba "encendida" simulada y verifica que a los 5 minutos se apague sola y registre "Timeout" en el historial.
+* [ ] **Prueba de Descanso (N):** Intenta encenderla inmediatamente después de un apagado y verifica que ignore la orden hasta que pase el minuto de cortesía.
+
+Con esto, el sistema queda blindado contra ruidos eléctricos y errores de operación.
+
+---
