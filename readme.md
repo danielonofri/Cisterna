@@ -81,8 +81,8 @@ La página principal se sirve directamente desde el NodeMCU y está optimizada p
 ### 📋 Checklist de Pruebas
 
 * [ ] **Prueba de Secado:** Simula el tanque bajo desconectando el cable y verifica que el relay actúe tras los 2 segundos de espera.
-* [ ] **Prueba de Seguridad (X):** Deja la bomba "encendida" simulada y verifica que a los 5 minutos se apague sola y registre "Timeout" en el historial.
-* [ ] **Prueba de Descanso (N):** Intenta encenderla inmediatamente después de un apagado y verifica que ignore la orden hasta que pase el minuto de cortesía.
+* [ ] **Prueba de Seguridad (X):** Deja la bomba "encendida" simulada y verifica que a los 30 minutos se apague sola y registre "Timeout" en el historial.
+* [ ] **Prueba de Descanso (N):** Intenta encenderla inmediatamente después de un apagado y verifica que ignore la orden hasta que pasen los 10 minutos de cortesía.
 
 Con esto, el sistema queda blindado contra ruidos eléctricos y errores de operación.
 
